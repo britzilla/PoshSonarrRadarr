@@ -21,16 +21,11 @@ function Invoke-RadarrDownloadedMoviesScan {
         [Parameter(Mandatory=$true)] [string] $DownloadClientId,
         [Parameter(Mandatory=$true)] [ValidateSet('Move', 'Copy')] [string] $ImportMode
     )
-    $ApiParam = @{
-        Type   = 'Radarr'
-        Path   = '/command'
-        Method = 'Post'
-        Body   = ConvertTo-Json -Compress -InputObject @{
-            path             = $Path
-            name             = 'DownloadedMoviesScan'
-            downloadClientId = $DownloadClientId.ToUpper()
-            importMode       = $ImportMode
-        }
+    $Body = [PSCustomObject] @{
+        path             = $Path
+        name             = 'DownloadedMoviesScan'
+        downloadClientId = $DownloadClientId.ToUpper()
+        importMode       = $ImportMode
     }
-    Invoke-ApiMethod @ApiParam
+    Invoke-ApiMethod Radarr -Path '/command' -Method Post -Body $Body
 }
