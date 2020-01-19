@@ -1,0 +1,7 @@
+# Ignore all logs
+*.log
+**/logs
+# Ignore Config.ps1
+Config.psd1
+#Ignore New-ModuleManifest.ps1
+New-ModuleManifest.ps1
