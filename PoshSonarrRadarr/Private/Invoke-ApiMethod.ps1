@@ -15,6 +15,8 @@ function Invoke-ApiMethod {
         # Assign $BaseUri and $ApiKey from config file based on the $Type parameter ('Sonarr' or 'Radarr')
         $BaseUri = [Uri] $Script:Config.$Type.BaseUri
         $ApiKey = $Script:Config.$Type.ApiKey
+        # System.Web needs to be added in Windows PowerShell
+        Add-Type -AssemblyName System.Web
     }
     process {
         # Define parameters for constructing a UriBuilder object using the supplied Uri, Path, and Query
@@ -40,13 +42,13 @@ function Invoke-ApiMethod {
             }
         }
         Write-Verbose "Calling $Type API using parameters:"
-        Write-Verbose ( $Parameters.Keys.ForEach{ '{0}: {1}' -f $_, $Parameters[$_] } -join ' ' )
+        Write-Verbose ( $RequestParam.Keys.ForEach{ '{0}: {1}' -f $_, $RequestParam[$_] } -join ' ' )
         try {
             $Result = Invoke-WebRequest @RequestParam
             $ResultObject = [ordered] @{
                 StatusCode        = $Result.StatusCode
                 StatusDescription = $Result.StatusDescription
-                Content           = $Result.Content | ConvertFrom-Json -Depth 10 | Select-Object -ExpandProperty $ExpandJsonProperty | Write-Output
+                Content           = $Result.Content | ConvertFrom-Json | Select-Object -ExpandProperty $ExpandJsonProperty | Write-Output
             }
         }
         catch {
