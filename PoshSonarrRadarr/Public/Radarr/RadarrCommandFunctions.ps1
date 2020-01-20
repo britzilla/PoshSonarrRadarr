@@ -14,7 +14,7 @@ function Get-RadarrCommand {
     }
 }
 
-function Invoke-RadarrDownloadedMoviesScan {
+function Invoke-RadarrDownloadedMovieScan {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory=$true)] [string] $Path,

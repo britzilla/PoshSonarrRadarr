@@ -12,13 +12,13 @@
 RootModule = 'PoshSonarrRadarr.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.1.1'
+ModuleVersion = '0.1.2'
 
 # Supported PSEditions
 CompatiblePSEditions = 'Desktop', 'Core'
 
 # ID used to uniquely identify this module
-GUID = 'd7394dac-da69-4be5-876d-7e91e7cbb77e'
+GUID = '2ddd2d3e-505b-4127-82b4-a427e7488751'
 
 # Author of this module
 Author = 'Ryan Biernbaum'
@@ -79,8 +79,8 @@ FunctionsToExport = @(
     'Get-SonarrEpisodeFile',
     'Get-SonarrSeries',
     'Get-SonarrSystemStatus',
-    'Invoke-RadarrDownloadedMoviesScan',
-    'Invoke-SonarrDownloadedMoviesScan',
+    'Invoke-RadarrDownloadedMovieScan',
+    'Invoke-SonarrDownloadedEpisodeScan',
     'New-RadarrMovie',
     'New-SonarrSeries',
     'Remove-RadarrMovie',

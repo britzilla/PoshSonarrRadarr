@@ -42,7 +42,7 @@ function Invoke-ApiMethod {
             }
         }
         Write-Verbose "Calling $Type API using parameters:"
-        Write-Verbose ( $RequestParam.Keys.ForEach{ '{0}: {1}' -f $_, $RequestParam[$_] } -join ' ' )
+        Write-Verbose ( $RequestParam.Keys.ForEach{ '{0}: {1}' -f $_, $RequestParam[$_] } -join ', ' )
         try {
             $Result = Invoke-WebRequest @RequestParam
             $ResultObject = [ordered] @{

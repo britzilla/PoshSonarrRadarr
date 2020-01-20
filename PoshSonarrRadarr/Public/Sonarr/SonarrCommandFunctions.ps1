@@ -14,7 +14,7 @@ function Get-SonarrCommand {
     }
 }
 
-function Invoke-SonarrDownloadedMoviesScan {
+function Invoke-SonarrDownloadedEpisodeScan {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory=$true)] [string] $Path,
@@ -27,5 +27,5 @@ function Invoke-SonarrDownloadedMoviesScan {
         downloadClientId = $DownloadClientId.ToUpper()
         importMode       = $ImportMode
     }
-    Invoke-ApiMethod Radarr -Path '/command' -Method Post -Body $Body
+    Invoke-ApiMethod Sonarr -Path '/command' -Method Post -Body $Body
 }
