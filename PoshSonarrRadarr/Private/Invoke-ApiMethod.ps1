@@ -48,7 +48,12 @@ function Invoke-ApiMethod {
             $ResultObject = [ordered] @{
                 StatusCode        = $Result.StatusCode
                 StatusDescription = $Result.StatusDescription
-                Content           = $Result.Content | ConvertFrom-Json | Select-Object -ExpandProperty $ExpandJsonProperty | Write-Output
+            }
+            if ($null -eq $ExpandJsonProperty) {
+                $ResultObject["Content"] = $Result.Content | ConvertFrom-Json
+            }
+            else {
+                $ResultObject["Content"] = $Result.Content | ConvertFrom-Json | Select-Object -ExpandProperty $ExpandJsonProperty | Write-Output
             }
         }
         catch {
